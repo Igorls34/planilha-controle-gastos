@@ -1,821 +1,808 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Baixe grátis a planilha de controle de gastos e organize suas finanças de forma simples e eficiente.">
-    <meta name="theme-color" content="#050505">
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-    <title>Planilha de Controle de Gastos - Download Grátis</title>
+    <meta name="description" content="Baixe gratuitamente uma planilha simples e eficiente para controlar os gastos da sua empresa.">
+    <meta name="theme-color" content="#0a0a0b">
+    <title>Planilha Gratuita de Controle de Gastos Empresariais</title>
+
+    <meta property="og:title" content="Planilha Gratuita de Controle de Gastos Empresariais">
+    <meta property="og:description" content="Baixe gratuitamente uma planilha simples e eficiente para controlar os gastos da sua empresa.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --primary: #3b82f6;
-            --primary-hover: #2563eb;
-            --primary-glow: rgba(59, 130, 246, 0.4);
-            --accent: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.3);
-            --bg-dark: #050505;
-            --bg-card: #0a0a0a;
-            --bg-card-hover: #111111;
-            --text-white: #f9fafb;
-            --text-muted: #9ca3af;
-            --border-color: #1f1f1f;
-            --gradient-1: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
-            --gradient-2: linear-gradient(135deg, #3b82f6, #06b6d4);
-            --gradient-3: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+            --bg: #0a0a0b;
+            --bg-elevated: #111113;
+            --bg-card: #161618;
+            --border: #1e1e22;
+            --border-hover: #2a2a30;
+            --text: #ededef;
+            --text-secondary: #9d9da6;
+            --text-tertiary: #666670;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --accent-soft: rgba(59,130,246,0.08);
+            --accent-border: rgba(59,130,246,0.2);
             --green: #22c55e;
-            --green-glow: rgba(34, 197, 94, 0.4);
+            --green-soft: rgba(34,197,94,0.08);
+            --green-border: rgba(34,197,94,0.2);
+            --purple: #8b5cf6;
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow: 0 4px 16px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+            --max-width: 1120px;
+            --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
         body {
-            font-family: 'Inter', 'Segoe UI', 'Arial', sans-serif;
-            color: var(--text-white);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            background-color: var(--bg-dark);
-            overflow-x: hidden;
-            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+        a { color:inherit; text-decoration:none; }
+        img { max-width:100%; display:block; }
 
-        a {
-            text-decoration: none;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Scroll Progress */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: var(--gradient-3);
-            background-size: 200% 100%;
-            animation: gradientShift 4s ease infinite;
-            z-index: 10000;
-            border-radius: 0 2px 2px 0;
-            transition: width 0.1s linear;
-            box-shadow: 0 0 10px var(--primary-glow);
-        }
-
-        @keyframes gradientShift {
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
+        .container { max-width:var(--max-width); margin:0 auto; padding:0 24px; }
 
         /* Header */
-        header {
-            background-color: rgba(5, 5, 5, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 15px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
+        .header {
+            position: fixed; top:0; left:0; right:0; z-index:100;
+            background: rgba(10,10,11,0.8); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
         }
-
-        header.scrolled {
-            background-color: rgba(5, 5, 5, 0.9);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        .header-inner {
+            max-width:var(--max-width); margin:0 auto;
+            display:flex; align-items:center; justify-content:space-between;
+            padding:14px 24px;
         }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
         .logo {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--text-white);
+            font-size:1.25rem; font-weight:800; color:var(--text);
             letter-spacing: -0.5px;
         }
-
-        .logo span {
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% 200%;
-            animation: gradientShift 4s ease infinite;
+        .logo span { color:var(--accent); }
+        .header-link {
+            font-size:0.875rem; color:var(--text-secondary); font-weight:500;
+            padding:6px 14px; border:1px solid var(--border); border-radius:var(--radius-sm);
+            transition: var(--transition);
         }
-
-        .btn-back {
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            transition: all 0.35s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-back:hover {
-            color: var(--text-white);
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
+        .header-link:hover { color:var(--text); border-color:var(--border-hover); background:var(--bg-elevated); }
 
         /* Hero */
-        .hero-section {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            padding: 120px 20px 80px;
+        .hero {
+            padding:140px 0 80px; position:relative; overflow:hidden;
         }
-
-        .hero-bg-gradient {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                radial-gradient(circle at 50% 40%, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.04) 30%, transparent 70%),
-                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
-            z-index: 0;
-            animation: pulseBg 8s ease-in-out infinite alternate;
+        .hero::before {
+            content:''; position:absolute; top:-300px; left:50%; transform:translateX(-50%);
+            width:800px; height:800px;
+            background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 60%);
+            pointer-events:none;
         }
-
-        @keyframes pulseBg {
-            0% {
-                opacity: 0.6;
-            }
-            100% {
-                opacity: 1;
-            }
+        .hero-grid {
+            display:flex; align-items:center; gap:80px; position:relative; z-index:1;
         }
-
-        .hero-content {
-            max-width: 1100px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-text {
-            flex: 1;
-            max-width: 520px;
-        }
-
+        .hero-text { flex:1; }
         .hero-badge {
-            display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--green);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            padding: 8px 16px;
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            border-radius: 50px;
-            background: rgba(34, 197, 94, 0.05);
+            display:inline-flex; align-items:center; gap:6px;
+            font-size:0.8rem; font-weight:600; color:var(--green);
+            text-transform:uppercase; letter-spacing:2px;
+            padding:6px 14px; border:1px solid var(--green-border);
+            border-radius:100px; background:var(--green-soft);
+            margin-bottom:24px;
+        }
+        .hero-badge .dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .hero h1 { font-size:3.2rem; font-weight:900; line-height:1.12; letter-spacing:-1.5px; margin-bottom:20px; }
+        .hero h1 span { color:var(--accent); }
+        .hero-subtitle { font-size:1.15rem; color:var(--text-secondary); line-height:1.65; margin-bottom:12px; }
+        .hero-note { font-size:0.95rem; color:var(--text-tertiary); margin-bottom:36px; }
+        .hero-cta {
+            display:inline-flex; align-items:center; gap:10px;
+            background:var(--accent); color:#fff;
+            font-size:1.05rem; font-weight:600;
+            padding:16px 32px; border-radius:var(--radius);
+            transition: var(--transition);
+            border:none; cursor:pointer;
+        }
+        .hero-cta:hover { background:var(--accent-hover); transform:translateY(-1px); box-shadow: 0 8px 24px rgba(59,130,246,0.3); }
+
+        /* Preview Card */
+        .preview-card {
+            background:var(--bg-card); border:1px solid var(--border);
+            border-radius:var(--radius-xl); padding:24px;
+            box-shadow: var(--shadow-lg);
+        }
+        .preview-card img { border-radius:var(--radius); }
+
+        /* Sections */
+        .section { padding:100px 0; }
+        .section-label {
+            font-size:0.8rem; font-weight:700; color:var(--accent);
+            text-transform:uppercase; letter-spacing:2px; margin-bottom:12px;
+        }
+        .section-title { font-size:2.4rem; font-weight:800; letter-spacing:-1px; margin-bottom:16px; line-height:1.2; }
+        .section-desc { font-size:1.1rem; color:var(--text-secondary); max-width:600px; margin-bottom:48px; line-height:1.65; }
+        .section-center { text-align:center; }
+        .section-center .section-desc { margin-left:auto; margin-right:auto; }
+
+        /* Spreadsheet Preview */
+        .preview-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+        .preview-item {
+            background:var(--bg-card); border:1px solid var(--border);
+            border-radius:var(--radius-lg); padding:16px;
+            cursor:pointer; transition: var(--transition);
+        }
+        .preview-item:hover { border-color:var(--border-hover); transform:translateY(-2px); box-shadow:var(--shadow); }
+        .preview-label {
+            font-size:0.8rem; font-weight:600; color:var(--text-secondary);
+            margin-top:12px; text-align:center;
         }
 
-        .hero-title {
-            font-size: 3.2rem;
-            margin-bottom: 20px;
-            line-height: 1.12;
-            font-weight: 900;
-            letter-spacing: -1.5px;
+        .ss-preview {
+            background:var(--bg-elevated); border-radius:var(--radius);
+            overflow:hidden; aspect-ratio:16/10; position:relative;
+            border:1px solid var(--border);
         }
-
-        .hero-title span {
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% 200%;
-            animation: gradientShift 4s ease infinite;
+        .ss-toolbar {
+            height:28px; background:#1a1a1e;
+            display:flex; align-items:center; gap:6px; padding:0 10px;
+            border-bottom:1px solid #252530;
         }
-
-        .hero-description {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            line-height: 1.7;
+        .ss-toolbar .ss-dot { width:8px; height:8px; border-radius:50%; }
+        .ss-toolbar .ss-dot:nth-child(1) { background:#ff5f57; }
+        .ss-toolbar .ss-dot:nth-child(2) { background:#febc2e; }
+        .ss-toolbar .ss-dot:nth-child(3) { background:#28c840; }
+        .ss-tab {
+            height:22px; background:#161618; display:flex; align-items:center;
+            padding:0 10px; border-bottom:1px solid #252530;
         }
-
-        .hero-features {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 30px;
+        .ss-tab span {
+            font-size:0.6rem; color:#9d9da6; font-weight:500;
+            background:#1e1e22; padding:2px 8px; border-radius:4px 4px 0 0;
         }
-
-        .hero-features .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            color: var(--text-muted);
+        .ss-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:#252530; }
+        .ss-cell {
+            background:#161618; padding:4px 6px; font-size:0.55rem;
+            color:var(--text-secondary);
         }
+        .ss-cell.header { background:#1a1a1e; color:#9d9da6; font-weight:600; font-size:0.5rem; text-transform:uppercase; }
+        .ss-cell.highlight { color:var(--accent); }
+        .ss-cell.green { color:var(--green); }
+        .ss-cell.red { color:#ef4444; }
 
-        .hero-features .feature-item i {
-            color: var(--green);
-            font-size: 1rem;
-            width: 20px;
-            text-align: center;
+        .ss-grid.summary-grid { grid-template-columns:repeat(2,1fr); }
+        .ss-summary-row {
+            display:flex; justify-content:space-between; padding:8px 12px;
+            font-size:0.65rem; border-bottom:1px solid #252530;
         }
+        .ss-summary-row .label { color:var(--text-secondary); }
+        .ss-summary-row .value { font-weight:600; }
+        .ss-summary-row .value.up { color:var(--green); }
+        .ss-summary-row .value.down { color:#ef4444; }
 
-        /* Form Card */
-        .form-card {
-            background: linear-gradient(145deg, var(--bg-card), #0d0d0d);
-            border: 1px solid var(--border-color);
-            padding: 45px 40px;
-            border-radius: 24px;
-            width: 420px;
-            flex-shrink: 0;
-            position: relative;
-            transition: all 0.4s ease;
+        .ss-readme {
+            padding:16px; font-size:0.65rem; color:var(--text-secondary); line-height:1.8;
         }
+        .ss-readme h4 { font-size:0.75rem; color:var(--text); margin-bottom:6px; }
+        .ss-readme ul { padding-left:14px; }
+        .ss-readme li { margin-bottom:2px; }
 
-        .form-card::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 24px;
-            background: var(--gradient-1);
-            opacity: 0.3;
-            z-index: -1;
-            transition: opacity 0.5s ease;
+        /* Cards */
+        .cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; }
+        .card-icon {
+            background:var(--bg-card); border:1px solid var(--border);
+            border-radius:var(--radius-lg); padding:28px 20px; text-align:center;
+            transition: var(--transition);
         }
+        .card-icon:hover { border-color:var(--border-hover); transform:translateY(-2px); }
+        .card-icon .icon { font-size:1.5rem; color:var(--accent); margin-bottom:10px; }
+        .card-icon h4 { font-size:0.9rem; font-weight:600; }
 
-        .form-card:hover::before {
-            opacity: 0.6;
+        .benefits-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+        .benefit-card {
+            background:var(--bg-card); border:1px solid var(--border);
+            border-radius:var(--radius-lg); padding:32px 28px;
+            display:flex; gap:18px; transition: var(--transition);
         }
-
-        .form-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            background: linear-gradient(145deg, var(--bg-card), #0d0d0d);
-            z-index: -1;
+        .benefit-card:hover { border-color:var(--border-hover); transform:translateY(-2px); box-shadow:var(--shadow); }
+        .benefit-icon {
+            width:44px; height:44px; border-radius:var(--radius);
+            background:var(--accent-soft); border:1px solid var(--accent-border);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.2rem; color:var(--accent); flex-shrink:0;
         }
+        .benefit-text h4 { font-size:1rem; font-weight:700; margin-bottom:4px; }
+        .benefit-text p { font-size:0.875rem; color:var(--text-secondary); line-height:1.5; }
 
-        .form-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-            text-align: center;
+        /* Form */
+        .form-section-wrapper {
+            background:var(--bg-elevated); border:1px solid var(--border);
+            border-radius:var(--radius-xl); padding:48px; max-width:520px;
+            margin:0 auto; position:relative;
         }
-
-        .form-card .form-subtitle {
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
+        .form-section-wrapper::before {
+            content:''; position:absolute; inset:-1px; border-radius:var(--radius-xl);
+            background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(139,92,246,0.3), rgba(59,130,246,0.1));
+            z-index:-1; opacity:0.5;
         }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
+        .form-title { font-size:1.5rem; font-weight:800; margin-bottom:6px; }
+        .form-subtitle { color:var(--text-secondary); font-size:0.9rem; margin-bottom:28px; }
+        .form-group { margin-bottom:20px; }
         .form-group label {
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 6px;
-            display: block;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display:block; font-size:0.8rem; font-weight:600; color:var(--text-secondary);
+            text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;
         }
-
         .form-group input {
-            width: 100%;
-            padding: 16px 18px;
-            background: #0a0a0a;
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            color: white;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.35s ease;
+            width:100%; padding:14px 16px; background:var(--bg-card);
+            border:1px solid var(--border); border-radius:var(--radius);
+            color:var(--text); font-size:1rem; font-family:inherit;
+            transition: var(--transition);
         }
-
         .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
-            background: #0d0d0d;
+            outline:none; border-color:var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
         }
-
-        .form-group input::placeholder {
-            color: #555;
-        }
-
+        .form-group input::placeholder { color:var(--text-tertiary); }
         .btn-submit {
-            width: 100%;
-            background: var(--gradient-2);
-            color: white;
-            padding: 18px;
-            border: none;
-            border-radius: 14px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.35s ease;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-            margin-top: 10px;
+            width:100%; padding:16px; background:var(--accent); color:#fff;
+            border:none; border-radius:var(--radius); font-size:1.05rem;
+            font-weight:600; cursor:pointer; transition: var(--transition);
+            display:flex; align-items:center; justify-content:center; gap:8px;
         }
-
-        .btn-submit::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn-submit:hover::before {
-            width: 500px;
-            height: 500px;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px var(--primary-glow);
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-submit i {
-            margin-right: 8px;
-        }
-
-        /* Form messages */
+        .btn-submit:hover { background:var(--accent-hover); transform:translateY(-1px); box-shadow:0 8px 24px rgba(59,130,246,0.3); }
+        .btn-submit:disabled { opacity:0.6; cursor:not-allowed; transform:none; box-shadow:none; }
         .form-message {
-            margin-top: 16px;
-            padding: 14px 18px;
-            border-radius: 12px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            display: none;
-            text-align: center;
+            margin-top:16px; padding:14px 18px; border-radius:var(--radius);
+            font-weight:500; font-size:0.9rem; display:none; text-align:center;
+        }
+        .form-message.success { display:block; background:var(--green-soft); border:1px solid var(--green-border); color:var(--green); }
+        .form-message.error { display:block; background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); color:#ef4444; }
+        .form-message.loading { display:block; background:var(--accent-soft); border:1px solid var(--accent-border); color:var(--accent); }
+
+        .success-overlay {
+            display:none; text-align:center; padding:20px 0;
+        }
+        .success-overlay.active { display:block; }
+        .success-overlay .check {
+            font-size:3.5rem; color:var(--green); margin-bottom:12px;
+        }
+        .success-overlay h3 { font-size:1.4rem; margin-bottom:8px; }
+        .success-overlay p { color:var(--text-secondary); font-size:0.95rem; margin-bottom:20px; }
+        .success-overlay .btn-wa {
+            display:inline-flex; align-items:center; gap:8px;
+            background:#22c55e; color:#fff; padding:12px 24px;
+            border-radius:var(--radius); font-weight:600; font-size:0.9rem;
+            transition: var(--transition);
+        }
+        .success-overlay .btn-wa:hover { background:#16a34a; transform:translateY(-1px); }
+
+        /* Social Proof */
+        .proof-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+        .proof-card {
+            background:var(--bg-card); border:1px solid var(--border);
+            border-radius:var(--radius-lg); padding:32px 24px; text-align:center;
+            transition: var(--transition);
+        }
+        .proof-card:hover { border-color:var(--border-hover); transform:translateY(-2px); }
+        .proof-stars { color:#f59e0b; font-size:1.1rem; margin-bottom:12px; letter-spacing:2px; }
+        .proof-card p { color:var(--text-secondary); font-size:0.9rem; line-height:1.5; }
+        .proof-card .placeholder {
+            display:inline-block; font-size:0.75rem; color:var(--text-tertiary);
+            padding:4px 10px; border:1px dashed var(--border); border-radius:100px;
+            margin-top:10px;
         }
 
-        .form-message.success {
-            display: block;
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            color: var(--green);
+        /* Dev Section */
+        .dev-grid { display:flex; align-items:center; gap:60px; }
+        .dev-avatar {
+            width:100px; height:100px; border-radius:50%;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            display:flex; align-items:center; justify-content:center;
+            font-size:2.5rem; font-weight:900; color:#fff; flex-shrink:0;
         }
-
-        .form-message.error {
-            display: block;
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+        .dev-info h2 { font-size:1.8rem; font-weight:800; margin-bottom:8px; }
+        .dev-info > p { color:var(--text-secondary); margin-bottom:20px; line-height:1.6; }
+        .dev-services {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:24px;
         }
-
-        .form-message.loading {
-            display: block;
-            background: rgba(59, 130, 246, 0.08);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            color: var(--primary);
+        .dev-service {
+            font-size:0.85rem; color:var(--text-secondary);
+            display:flex; align-items:center; gap:6px;
         }
-
-        /* Success state */
-        .form-card.success-state .form-fields {
-            display: none;
+        .dev-service i { color:var(--accent); font-size:0.8rem; }
+        .btn-wa {
+            display:inline-flex; align-items:center; gap:8px;
+            background:#22c55e; color:#fff; padding:14px 28px;
+            border-radius:var(--radius); font-weight:600; font-size:0.95rem;
+            transition: var(--transition);
         }
-
-        .form-card.success-state .form-message {
-            display: none;
-        }
-
-        .success-content {
-            display: none;
-            text-align: center;
-        }
-
-        .form-card.success-state .success-content {
-            display: block;
-        }
-
-        .success-content .success-icon {
-            font-size: 4rem;
-            color: var(--green);
-            margin-bottom: 16px;
-        }
-
-        .success-content h3 {
-            margin-bottom: 10px;
-        }
-
-        .success-content p {
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .btn-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #22c55e;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.35s ease;
-        }
-
-        .btn-whatsapp:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
-        }
-
-        /* Trust badges */
-        .trust-section {
-            text-align: center;
-            padding: 0 20px 80px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .trust-badge i {
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
+        .btn-wa:hover { background:#16a34a; transform:translateY(-1px); box-shadow:0 6px 20px rgba(34,197,94,0.3); }
 
         /* Footer */
-        footer {
-            background-color: var(--bg-dark);
-            padding: 30px 0;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
+        .footer {
+            border-top:1px solid var(--border); padding:40px 0;
+            text-align:center;
         }
+        .footer-brand { font-weight:700; color:var(--text); margin-bottom:4px; }
+        .footer-brand span { color:var(--accent); }
+        .footer-info { font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px; }
+        .footer-copy { font-size:0.8rem; color:var(--text-tertiary); margin-top:16px; }
+        .footer-social {
+            display:flex; justify-content:center; gap:14px; margin-top:16px;
+        }
+        .footer-social a {
+            width:36px; height:36px; border-radius:var(--radius-sm);
+            border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+            color:var(--text-tertiary); font-size:0.9rem; transition:var(--transition);
+        }
+        .footer-social a:hover { color:var(--text); border-color:var(--border-hover); background:var(--bg-elevated); }
 
-        footer p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        /* Lightbox */
+        .lightbox {
+            display:none; position:fixed; inset:0; z-index:999;
+            background:rgba(0,0,0,0.85); backdrop-filter:blur(8px);
+            align-items:center; justify-content:center; padding:40px;
         }
+        .lightbox.open { display:flex; }
+        .lightbox-content {
+            background:var(--bg-card); border:1px solid var(--border);
+            border-radius:var(--radius-xl); padding:32px; max-width:700px;
+            width:100%; position:relative;
+        }
+        .lightbox-close {
+            position:absolute; top:12px; right:16px;
+            background:none; border:none; color:var(--text-secondary);
+            font-size:1.5rem; cursor:pointer; transition:var(--transition);
+        }
+        .lightbox-close:hover { color:var(--text); }
+        .lightbox-title { font-size:1.2rem; font-weight:700; margin-bottom:20px; }
 
         /* Animations */
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .reveal { opacity:0; transform:translateY(24px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+
+        /* Float WhatsApp */
+        .wa-float {
+            position:fixed; bottom:28px; right:28px; z-index:90;
+            width:56px; height:56px; border-radius:50%; background:#22c55e;
+            color:#fff; font-size:26px; display:flex; align-items:center;
+            justify-content:center; box-shadow:0 4px 20px rgba(34,197,94,0.3);
+            transition:var(--transition);
         }
+        .wa-float:hover { transform:scale(1.08); box-shadow:0 6px 28px rgba(34,197,94,0.45); }
 
-        .animate-in {
-            opacity: 0;
-            animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        @media (max-width:900px) {
+            .hero-grid { flex-direction:column; gap:40px; text-align:center; }
+            .hero h1 { font-size:2.2rem; }
+            .hero-subtitle { font-size:1rem; }
+            .preview-grid { grid-template-columns:1fr; max-width:400px; margin:0 auto; }
+            .proof-grid { grid-template-columns:1fr; }
+            .dev-grid { flex-direction:column; text-align:center; gap:30px; }
+            .dev-services { grid-template-columns:1fr 1fr; }
+            .benefits-grid { grid-template-columns:1fr; }
+            .cards-grid { grid-template-columns:repeat(2,1fr); }
+            .section-title { font-size:1.8rem; }
+            .form-section-wrapper { padding:32px 24px; }
         }
-
-        .delay-1 {
-            animation-delay: 0.1s;
-        }
-        .delay-2 {
-            animation-delay: 0.3s;
-        }
-        .delay-3 {
-            animation-delay: 0.5s;
-        }
-        .delay-4 {
-            animation-delay: 0.7s;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 40px;
-            }
-
-            .hero-text {
-                max-width: 100%;
-            }
-
-            .hero-title {
-                font-size: 2.4rem;
-            }
-
-            .hero-description {
-                font-size: 1.05rem;
-            }
-
-            .hero-features {
-                align-items: flex-start;
-                max-width: 300px;
-                margin: 0 auto 25px;
-            }
-
-            .form-card {
-                width: 100%;
-                max-width: 420px;
-                padding: 35px 28px;
-            }
-
-            .trust-badges {
-                gap: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .hero-badge {
-                font-size: 0.75rem;
-                letter-spacing: 2px;
-            }
-
-            .form-card {
-                padding: 30px 20px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+        @media (max-width:480px) {
+            .hero h1 { font-size:1.8rem; }
+            .hero-badge { font-size:0.7rem; }
+            .section-title { font-size:1.5rem; }
+            .cards-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+            .dev-services { grid-template-columns:1fr; }
+            .section { padding:60px 0; }
         }
     </style>
 </head>
-
 <body>
 
-    <div class="scroll-progress"></div>
+<header class="header">
+    <div class="header-inner">
+        <a href="/" class="logo">Igor<span>Dev</span></a>
+        <a href="https://igordev-portfolio-ofc.netlify.app/" class="header-link">← Portfolio</a>
+    </div>
+</header>
 
-    <header id="header">
-        <div class="header-container">
-            <a class="logo" href="/">Igor<span>Dev</span></a>
-            <a href="https://igordev-portfolio-ofc.netlify.app/" class="btn-back">
-                <i class="fa-solid fa-arrow-left"></i> Voltar ao Portfólio
-            </a>
+<!-- Hero -->
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-text reveal">
+            <div class="hero-badge"><span class="dot"></span> Download Gratuito</div>
+            <h1>Planilha Gratuita de <span>Controle de Gastos Empresariais</span></h1>
+            <p class="hero-subtitle">Descubra exatamente quanto sua empresa está gastando e acompanhe seus investimentos de forma simples, organizada e profissional.</p>
+            <p class="hero-note">Uma ferramenta prática para pequenos empreendedores que desejam ter mais controle financeiro sem complicação.</p>
+            <a href="#form-section" class="hero-cta">📥 Baixar Planilha Gratuitamente</a>
         </div>
-    </header>
-
-    <main>
-        <section class="hero-section">
-            <div class="hero-bg-gradient"></div>
-            <div class="hero-content">
-                <div class="hero-text">
-                    <span class="hero-badge animate-in delay-1">
-                        <i class="fa-solid fa-download"></i> DOWNLOAD GRÁTIS
-                    </span>
-                    <h1 class="hero-title animate-in delay-2">
-                        Planilha de <span>Controle de Gastos</span>
-                    </h1>
-                    <p class="hero-description animate-in delay-3">
-                        Organize suas finanças de forma simples e eficiente. Controle cada real,
-                        acompanhe seus gastos mensais e conquiste sua liberdade financeira.
-                    </p>
-                    <div class="hero-features animate-in delay-3">
-                        <div class="feature-item">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>Registro de entradas e saídas</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>Controle por categorias</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>Dashboard visual do seu mês</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <span>100% editável e fácil de usar</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-card animate-in delay-4" id="formCard">
-                    <h3>Baixe agora</h3>
-                    <p class="form-subtitle">Preencha os dados e receba a planilha no seu email e WhatsApp</p>
-
-                    <form id="leadForm" class="form-fields">
-                        <div class="form-group">
-                            <label for="nome">Nome Completo</label>
-                            <input type="text" id="nome" name="nome" placeholder="Seu nome aqui" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefone">WhatsApp</label>
-                            <input type="tel" id="telefone" name="telefone" placeholder="(24) 99999-8888" required>
-                        </div>
-                        <button type="submit" class="btn-submit" id="submitBtn">
-                            <i class="fa-solid fa-paper-plane"></i> Quero minha planilha grátis
-                        </button>
-                    </form>
-
-                    <div class="form-message" id="formMessage"></div>
-
-                    <div class="success-content">
-                        <div class="success-icon">
-                            <i class="fa-solid fa-circle-check"></i>
-                        </div>
-                        <h3>Planilha enviada!</h3>
-                        <p>Enviamos a <strong>Planilha de Controle de Gastos</strong> para seu email e WhatsApp. Se não encontrar, verifique a caixa de spam.</p>
-                        <a href="https://wa.me/5524998574876?text=Oi%20IgorDev!%20Baixei%20a%20planilha%20e%20gostaria%20de%20tirar%20uma%20dúvida."
-                            class="btn-whatsapp" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i> Falar com o IgorDev
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="trust-section animate-in delay-4">
-            <div class="trust-badges">
-                <div class="trust-badge">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <span>Seus dados estão seguros</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span>Envio imediato</span>
-                </div>
-                <div class="trust-badge">
-                    <i class="fa-solid fa-file-excel"></i>
-                    <span>Compatível com Excel</span>
+        <div class="preview-card reveal">
+            <div class="ss-preview" style="aspect-ratio:4/3;">
+                <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
+                <div class="ss-tab"><span>Gastos</span></div>
+                <div class="ss-grid">
+                    <div class="ss-cell header">Data</div><div class="ss-cell header">Descrição</div><div class="ss-cell header">Categoria</div><div class="ss-cell header">Valor</div>
+                    <div class="ss-cell">01/06</div><div class="ss-cell">Mercado</div><div class="ss-cell highlight">Alimentação</div><div class="ss-cell red">R$ 450</div>
+                    <div class="ss-cell">03/06</div><div class="ss-cell">Internet</div><div class="ss-cell highlight">Fixo</div><div class="ss-cell red">R$ 120</div>
+                    <div class="ss-cell">05/06</div><div class="ss-cell">Software</div><div class="ss-cell highlight">Ferramentas</div><div class="ss-cell red">R$ 89</div>
+                    <div class="ss-cell">08/06</div><div class="ss-cell">Cliente A</div><div class="ss-cell green">Receita</div><div class="ss-cell green">R$ 2.500</div>
+                    <div class="ss-cell">10/06</div><div class="ss-cell">Anúncios</div><div class="ss-cell highlight">Marketing</div><div class="ss-cell red">R$ 200</div>
+                    <div class="ss-cell">12/06</div><div class="ss-cell">Cliente B</div><div class="ss-cell green">Receita</div><div class="ss-cell green">R$ 1.800</div>
+                    <div class="ss-cell">15/06</div><div class="ss-cell">Material</div><div class="ss-cell highlight">Estoque</div><div class="ss-cell red">R$ 320</div>
+                    <div class="ss-cell">18/06</div><div class="ss-cell">Freelancer</div><div class="ss-cell green">Receita</div><div class="ss-cell green">R$ 3.100</div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</section>
 
-    <footer>
-        <p>&copy; 2026 IgorDev — Desenvolvido com foco em performance.</p>
-    </footer>
+<!-- Spreadsheet Preview -->
+<section class="section">
+    <div class="container section-center">
+        <div class="section-label reveal">Demonstração</div>
+        <h2 class="section-title reveal">Veja o que você vai receber</h2>
+        <p class="section-desc reveal">Uma planilha simples, intuitiva e pronta para uso.</p>
+        <div class="preview-grid">
+            <div class="preview-item reveal" onclick="openLightbox('gastos')">
+                <div class="ss-preview">
+                    <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
+                    <div class="ss-tab"><span>Gastos</span></div>
+                    <div class="ss-grid">
+                        <div class="ss-cell header">Data</div><div class="ss-cell header">Descrição</div><div class="ss-cell header">Categoria</div><div class="ss-cell header">Valor</div>
+                        <div class="ss-cell">01/06</div><div class="ss-cell">Mercado</div><div class="ss-cell">Alimentação</div><div class="ss-cell red">R$ 450</div>
+                        <div class="ss-cell">03/06</div><div class="ss-cell">Internet</div><div class="ss-cell">Fixo</div><div class="ss-cell red">R$ 120</div>
+                        <div class="ss-cell">08/06</div><div class="ss-cell">Cliente A</div><div class="ss-cell green">Receita</div><div class="ss-cell green">R$ 2.500</div>
+                    </div>
+                </div>
+                <p class="preview-label">Aba Gastos</p>
+            </div>
+            <div class="preview-item reveal" onclick="openLightbox('resumo')">
+                <div class="ss-preview">
+                    <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
+                    <div class="ss-tab"><span>Resumo</span></div>
+                    <div style="padding:14px;">
+                        <div class="ss-summary-row"><span class="label">Total Receitas</span><span class="value up">R$ 7.400</span></div>
+                        <div class="ss-summary-row"><span class="label">Total Gastos</span><span class="value down">R$ 3.210</span></div>
+                        <div class="ss-summary-row"><span class="label">Saldo</span><span class="value up">R$ 4.190</span></div>
+                        <div class="ss-summary-row"><span class="label">Maior gasto</span><span class="value">R$ 450</span></div>
+                        <div class="ss-summary-row"><span class="label">Investimentos</span><span class="value">R$ 1.200</span></div>
+                    </div>
+                </div>
+                <p class="preview-label">Aba Resumo</p>
+            </div>
+            <div class="preview-item reveal" onclick="openLightbox('leia-me')">
+                <div class="ss-preview">
+                    <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
+                    <div class="ss-tab"><span>Leia-me</span></div>
+                    <div class="ss-readme">
+                        <h4>📋 Instruções</h4>
+                        <ul>
+                            <li>Preencha os dados na aba Gastos</li>
+                            <li>Veja o resumo automático</li>
+                            <li>Personalize categorias</li>
+                            <li>Controle mensal simples</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="preview-label">Aba Leia-me</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <script>
-        const API_URL = 'http://2.24.124.93:3002/api/capturar-lead';
+<!-- Ideal For -->
+<section class="section" style="background:var(--bg-elevated);">
+    <div class="container section-center">
+        <div class="section-label reveal">Público</div>
+        <h2 class="section-title reveal">Quem pode utilizar esta planilha?</h2>
+        <div class="cards-grid reveal">
+            <div class="card-icon"><div class="icon">🏢</div><h4>MEIs</h4></div>
+            <div class="card-icon"><div class="icon">🏪</div><h4>Pequenos Negócios</h4></div>
+            <div class="card-icon"><div class="icon">🛒</div><h4>Lojas Online</h4></div>
+            <div class="card-icon"><div class="icon">🔧</div><h4>Prestadores de Serviço</h4></div>
+            <div class="card-icon"><div class="icon">💼</div><h4>Autônomos</h4></div>
+            <div class="card-icon"><div class="icon">🚀</div><h4>Empreendedores</h4></div>
+        </div>
+        <p style="color:var(--text-secondary); margin-top:32px; font-size:0.95rem;" class="reveal">Se você precisa controlar melhor os gastos da sua empresa, esta planilha foi feita para você.</p>
+    </div>
+</section>
 
-        const form = document.getElementById('leadForm');
-        const formCard = document.getElementById('formCard');
-        const formMessage = document.getElementById('formMessage');
-        const submitBtn = document.getElementById('submitBtn');
-        const telefoneInput = document.getElementById('telefone');
+<!-- Benefits -->
+<section class="section">
+    <div class="container section-center">
+        <div class="section-label reveal">Benefícios</div>
+        <h2 class="section-title reveal">Por que utilizar esta planilha?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card reveal">
+                <div class="benefit-icon">📊</div>
+                <div class="benefit-text">
+                    <h4>Controle total dos gastos</h4>
+                    <p>Registre cada entrada e saída com categorias personalizadas.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon">💰</div>
+                <div class="benefit-text">
+                    <h4>Saiba quanto investiu</h4>
+                    <p>Acompanhe o total investido na empresa em tempo real.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon">📁</div>
+                <div class="benefit-text">
+                    <h4>Organização simples</h4>
+                    <p>Estruturada para facilitar o dia a dia do empreendedor.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon">⚡</div>
+                <div class="benefit-text">
+                    <h4>Fácil de preencher</h4>
+                    <p>Interface intuitiva que qualquer pessoa consegue usar.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon">📈</div>
+                <div class="benefit-text">
+                    <h4>Resultados rápidos</h4>
+                    <p>Visualize o resumo financeiro automaticamente.</p>
+                </div>
+            </div>
+            <div class="benefit-card reveal">
+                <div class="benefit-icon">🆓</div>
+                <div class="benefit-text">
+                    <h4>Totalmente gratuita</h4>
+                    <p>Sem custos, sem cadastro complicado, sem letras miúdas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        function formatarTelefone(value) {
-            const nums = value.replace(/\D/g, '');
-            if (nums.length <= 2) return `(${nums}`;
-            if (nums.length <= 7) return `(${nums.slice(0, 2)}) ${nums.slice(2)}`;
-            return `(${nums.slice(0, 2)}) ${nums.slice(2, 7)}-${nums.slice(7, 11)}`;
+<!-- Form -->
+<section class="section" id="form-section" style="background:var(--bg-elevated);">
+    <div class="container section-center">
+        <div class="section-label reveal">Download</div>
+        <h2 class="section-title reveal">Receba sua planilha gratuitamente</h2>
+        <p class="section-desc reveal" style="max-width:440px;">Preencha os dados abaixo e receba sua planilha no email e WhatsApp.</p>
+        <div class="form-section-wrapper reveal">
+            <form id="leadForm" style="display:block;">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">WhatsApp</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(24) 99999-8888" required>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">📥 Baixar Planilha Gratuitamente</button>
+                <div class="form-message" id="formMessage"></div>
+            </form>
+            <div class="success-overlay" id="successOverlay">
+                <div class="check"><i class="fa-solid fa-circle-check"></i></div>
+                <h3>Planilha enviada com sucesso!</h3>
+                <p>Enviamos a Planilha de Controle de Gastos para seu email e WhatsApp. Se não encontrar, verifique a caixa de spam.</p>
+                <a href="https://wa.me/5524998574876?text=Olá!%20Baixei%20a%20planilha%20e%20gostaria%20de%20saber%20mais%20sobre%20suas%20soluções." class="btn-wa" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Falar com o IgorDev
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Proof -->
+<section class="section">
+    <div class="container section-center">
+        <div class="section-label reveal">Avaliações</div>
+        <h2 class="section-title reveal">Empreendedores já utilizam esta planilha</h2>
+        <p class="section-desc reveal">Para organizar seus gastos de forma simples e eficiente.</p>
+        <div class="proof-grid">
+            <div class="proof-card reveal">
+                <div class="proof-stars">★★★★★</div>
+                <p>"Fácil de usar, me ajudou a organizar as finanças da minha loja em poucos minutos."</p>
+                <span class="placeholder">Depoimento real em breve</span>
+            </div>
+            <div class="proof-card reveal">
+                <div class="proof-stars">★★★★★</div>
+                <p>"Simples e prática. Finalmente entendi para onde meu dinheiro estava indo."</p>
+                <span class="placeholder">Depoimento real em breve</span>
+            </div>
+            <div class="proof-card reveal">
+                <div class="proof-stars">★★★★★</div>
+                <p>"Ideal para pequenos negócios. Recomendo para qualquer MEI que quer se organizar."</p>
+                <span class="placeholder">Depoimento real em breve</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Developer -->
+<section class="section" style="background:var(--bg-elevated);">
+    <div class="container">
+        <div class="dev-grid">
+            <div class="dev-avatar reveal">ID</div>
+            <div class="dev-info reveal">
+                <div class="section-label">Desenvolvedor</div>
+                <h2>Desenvolvido por Igor Dev</h2>
+                <p>Ajudo empresas e empreendedores a criarem soluções digitais para organização, automação e gestão.</p>
+                <div class="dev-services">
+                    <div class="dev-service"><i class="fa-solid fa-check"></i> Sistemas Web</div>
+                    <div class="dev-service"><i class="fa-solid fa-check"></i> Planilhas Inteligentes</div>
+                    <div class="dev-service"><i class="fa-solid fa-check"></i> Automações</div>
+                    <div class="dev-service"><i class="fa-solid fa-check"></i> Dashboards e Power BI</div>
+                    <div class="dev-service"><i class="fa-solid fa-check"></i> Sites Institucionais</div>
+                    <div class="dev-service"><i class="fa-solid fa-check"></i> E-commerce</div>
+                </div>
+                <a href="https://wa.me/5524998574876?text=Olá,%20tudo%20bem?%20Vi%20sua%20planilha%20gratuita%20e%20gostaria%20de%20conhecer%20suas%20soluções." class="btn-wa" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p class="footer-brand">Igor<span>Dev</span></p>
+        <p class="footer-info">WhatsApp: (24) 99857-4876</p>
+        <p class="footer-copy">&copy; 2026 IgorDev. Todos os direitos reservados.</p>
+        <div class="footer-social">
+            <a href="https://github.com/Igorls34" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/igor-laurindo-5135aa246/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/igor_devofc/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/5524998574876?text=Olá!%20Vi%20sua%20planilha%20gratuita%20e%20gostaria%20de%20saber%20mais." class="wa-float" target="_blank" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <div class="lightbox-title" id="lightboxTitle"></div>
+        <div id="lightboxBody"></div>
+    </div>
+</div>
+
+<script>
+    const API_URL = 'http://2.24.124.93:3002/api/capturar-lead';
+
+    // Reveal animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Phone mask
+    const telInput = document.getElementById('telefone');
+    telInput.addEventListener('input', function() {
+        const nums = this.value.replace(/\D/g, '');
+        if (nums.length <= 2) this.value = nums ? `(${nums}` : '';
+        else if (nums.length <= 7) this.value = `(${nums.slice(0,2)}) ${nums.slice(2)}`;
+        else this.value = `(${nums.slice(0,2)}) ${nums.slice(2,7)}-${nums.slice(7,11)}`;
+    });
+
+    // Form submit
+    const form = document.getElementById('leadForm');
+    const formMsg = document.getElementById('formMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    const successOverlay = document.getElementById('successOverlay');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefone = document.getElementById('telefone').value.trim();
+
+        if (!nome || !email || !telefone) {
+            showMsg('Preencha todos os campos.', 'error'); return;
         }
 
-        telefoneInput.addEventListener('input', function () {
-            const cursor = this.selectionStart;
-            const antes = this.value.length;
-            this.value = formatarTelefone(this.value);
-            const depois = this.value.length;
-            this.setSelectionRange(cursor + (depois - antes), cursor + (depois - antes));
-        });
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+        showMsg('Enviando planilha para você...', 'loading');
 
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const nome = document.getElementById('nome').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const telefone = document.getElementById('telefone').value.trim();
-
-            if (!nome || !email || !telefone) {
-                showMessage('Por favor, preencha todos os campos.', 'error');
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
-            showMessage('Enviando a planilha para você...', 'loading');
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome, email, telefone })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    formCard.classList.add('success-state');
-                } else {
-                    showMessage(
-                        data.error || 'Houve um erro ao enviar. Tente novamente.',
-                        'error'
-                    );
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Quero minha planilha grátis';
-                }
-            } catch (err) {
-                showMessage('Erro de conexão. Verifique sua internet e tente novamente.', 'error');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Quero minha planilha grátis';
-            }
-        });
-
-        function showMessage(msg, type) {
-            formMessage.textContent = msg;
-            formMessage.className = 'form-message ' + type;
-        }
-
-        // Scroll progress bar
-        const progressBar = document.querySelector('.scroll-progress');
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-            progressBar.style.width = progress + '%';
-        });
-
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
+        try {
+            const res = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome, email, telefone })
+            });
+            const data = await res.json();
+            if (data.success) {
+                form.style.display = 'none';
+                successOverlay.classList.add('active');
             } else {
-                header.classList.remove('scrolled');
+                showMsg(data.error || 'Erro ao enviar. Tente novamente.', 'error');
+                resetBtn();
             }
-        });
-    </script>
+        } catch (err) {
+            showMsg('Erro de conexão. Verifique sua internet.', 'error');
+            resetBtn();
+        }
+    });
+
+    function showMsg(msg, type) { formMsg.textContent = msg; formMsg.className = 'form-message ' + type; }
+    function resetBtn() { submitBtn.disabled = false; submitBtn.innerHTML = '📥 Baixar Planilha Gratuitamente'; }
+
+    // Lightbox
+    function openLightbox(tab) {
+        const lb = document.getElementById('lightbox');
+        document.getElementById('lightboxTitle').textContent = tab === 'gastos' ? 'Aba Gastos' : tab === 'resumo' ? 'Aba Resumo' : 'Aba Leia-me';
+        const body = document.getElementById('lightboxBody');
+        if (tab === 'gastos') {
+            body.innerHTML = `<div class="ss-preview" style="aspect-ratio:auto; min-height:300px;">
+                <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
+                <div class="ss-tab"><span>Gastos</span></div>
+                <div class="ss-grid">
+                    <div class="ss-cell header">Data</div><div class="ss-cell header">Descrição</div><div class="ss-cell header">Categoria</div><div class="ss-cell header">Valor</div>
+                    ${Array(10).fill(0).map((_,i) => {
+                        const days = ['01/06','03/06','05/06','08/06','10/06','12/06','15/06','18/06','20/06','22/06'];
+                        const descs = ['Mercado','Internet','Software','Cliente A','Anúncios','Cliente B','Material','Freelancer','Assinatura','Consultoria'];
+                        const cats = ['Alimentação','Fixo','Ferramentas','Receita','Marketing','Receita','Estoque','Receita','Ferramentas','Receita'];
+                        const vals = ['R$ 450','R$ 120','R$ 89','R$ 2.500','R$ 200','R$ 1.800','R$ 320','R$ 3.100','R$ 49','R$ 950'];
+                        const cls = vals[i].startsWith('R$ 2')||vals[i].startsWith('R$ 1')||vals[i].startsWith('R$ 3')||vals[i].startsWith('R$ 9')?'green':'red';
+                        return `<div class="ss-cell">${days[i]}</div><div class="ss-cell">${descs[i]}</div><div class="ss-cell">${cats[i]}</div><div class="ss-cell ${cls}">${vals[i]}</div>`;
+                    }).join('')}
+                </div>
+            </div>`;
+        } else if (tab === 'resumo') {
+            body.innerHTML = `<div class="ss-preview" style="aspect-ratio:auto; min-height:300px;">
+                <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
+                <div class="ss-tab"><span>Resumo</span></div>
+                <div style="padding:20px;">${[
+                    ['Total Receitas','R$ 8.350','up'],['Total Gastos','R$ 3.228','down'],
+                    ['Saldo','R$ 5.122','up'],['Maior gasto','R$ 450',''],
+                    ['Investimentos','R$ 1.200',''],['Média diária','R$ 170',''],
+                    ['Categorias usadas','6',''],['Dias registrados','22','']
+                ].map(([l,v,c]) => `<div class="ss-summary-row"><span class="label">${l}</span><span class="value ${c}">${v}</span></div>`).join('')}</div>
+            </div>`;
+        } else {
+            body.innerHTML = `<div class="ss-preview" style="aspect-ratio:auto; min-height:300px;">
+                <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
+                <div class="ss-tab"><span>Leia-me</span></div>
+                <div class="ss-readme">
+                    <h4>📋 Bem-vindo à Planilha de Controle de Gastos</h4>
+                    <p style="margin-bottom:12px;">Esta planilha foi criada para ajudar pequenos empreendedores a controlar suas finanças.</p>
+                    <h4>🚀 Como usar</h4>
+                    <ul><li>Preencha os dados na aba <strong>Gastos</strong></li><li>As categorias são personalizáveis</li><li>O resumo é gerado automaticamente</li><li>Registre tanto gastos quanto receitas</li></ul>
+                    <h4 style="margin-top:12px;">💡 Dicas</h4>
+                    <ul><li>Atualize semanalmente para melhor controle</li><li>Use as categorias que fazem sentido para seu negócio</li><li>Não apague as fórmulas das células coloridas</li></ul>
+                    <p style="margin-top:12px; color:var(--text-tertiary);">Desenvolvido por IgorDev</p>
+                </div>
+            </div>`;
+        }
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+        if (e && e.target !== document.getElementById('lightbox')) return;
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 
 </body>
-
 </html>

@@ -128,7 +128,11 @@
             border-radius:var(--radius-xl); padding:24px;
             box-shadow: var(--shadow-lg);
         }
-        .preview-card img { border-radius:var(--radius); }
+        .preview-card img { border-radius:var(--radius); width:100%; height:auto; }
+
+        .preview-img { border-radius:var(--radius); width:100%; height:auto; display:block; }
+
+        .preview-item img { border-radius:var(--radius) var(--radius) 0 0; width:100%; height:auto; }
 
         /* Sections */
         .section { padding:100px 0; }
@@ -430,21 +434,7 @@
             <a href="#form-section" class="hero-cta">📥 Baixar Planilha Gratuitamente</a>
         </div>
         <div class="preview-card reveal">
-            <div class="ss-preview" style="aspect-ratio:4/3;">
-                <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
-                <div class="ss-tab"><span>Gastos</span></div>
-                <div class="ss-grid">
-                    <div class="ss-cell header">Data</div><div class="ss-cell header">Descrição</div><div class="ss-cell header">Categoria</div><div class="ss-cell header">Valor</div>
-                    <div class="ss-cell">01/06</div><div class="ss-cell">Mercado</div><div class="ss-cell highlight">Alimentação</div><div class="ss-cell red">R$ 450</div>
-                    <div class="ss-cell">03/06</div><div class="ss-cell">Internet</div><div class="ss-cell highlight">Fixo</div><div class="ss-cell red">R$ 120</div>
-                    <div class="ss-cell">05/06</div><div class="ss-cell">Software</div><div class="ss-cell highlight">Ferramentas</div><div class="ss-cell red">R$ 89</div>
-                    <div class="ss-cell">08/06</div><div class="ss-cell">Cliente A</div><div class="ss-cell green">Receita</div><div class="ss-cell green">R$ 2.500</div>
-                    <div class="ss-cell">10/06</div><div class="ss-cell">Anúncios</div><div class="ss-cell highlight">Marketing</div><div class="ss-cell red">R$ 200</div>
-                    <div class="ss-cell">12/06</div><div class="ss-cell">Cliente B</div><div class="ss-cell green">Receita</div><div class="ss-cell green">R$ 1.800</div>
-                    <div class="ss-cell">15/06</div><div class="ss-cell">Material</div><div class="ss-cell highlight">Estoque</div><div class="ss-cell red">R$ 320</div>
-                    <div class="ss-cell">18/06</div><div class="ss-cell">Freelancer</div><div class="ss-cell green">Receita</div><div class="ss-cell green">R$ 3.100</div>
-                </div>
-            </div>
+            <img src="images/gastos.png" alt="Planilha de Controle de Gastos" class="preview-img" loading="lazy" width="800" height="600">
         </div>
     </div>
 </section>
@@ -457,46 +447,15 @@
         <p class="section-desc reveal">Uma planilha simples, intuitiva e pronta para uso.</p>
         <div class="preview-grid">
             <div class="preview-item reveal" onclick="openLightbox('gastos')">
-                <div class="ss-preview">
-                    <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
-                    <div class="ss-tab"><span>Gastos</span></div>
-                    <div class="ss-grid">
-                        <div class="ss-cell header">Data</div><div class="ss-cell header">Descrição</div><div class="ss-cell header">Categoria</div><div class="ss-cell header">Valor</div>
-                        <div class="ss-cell">01/06</div><div class="ss-cell">Mercado</div><div class="ss-cell">Alimentação</div><div class="ss-cell red">R$ 450</div>
-                        <div class="ss-cell">03/06</div><div class="ss-cell">Internet</div><div class="ss-cell">Fixo</div><div class="ss-cell red">R$ 120</div>
-                        <div class="ss-cell">08/06</div><div class="ss-cell">Cliente A</div><div class="ss-cell green">Receita</div><div class="ss-cell green">R$ 2.500</div>
-                    </div>
-                </div>
+                <img src="images/gastos.png" alt="Aba Gastos da planilha" class="preview-img" loading="lazy" width="400" height="250">
                 <p class="preview-label">Aba Gastos</p>
             </div>
             <div class="preview-item reveal" onclick="openLightbox('resumo')">
-                <div class="ss-preview">
-                    <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
-                    <div class="ss-tab"><span>Resumo</span></div>
-                    <div style="padding:14px;">
-                        <div class="ss-summary-row"><span class="label">Total Receitas</span><span class="value up">R$ 7.400</span></div>
-                        <div class="ss-summary-row"><span class="label">Total Gastos</span><span class="value down">R$ 3.210</span></div>
-                        <div class="ss-summary-row"><span class="label">Saldo</span><span class="value up">R$ 4.190</span></div>
-                        <div class="ss-summary-row"><span class="label">Maior gasto</span><span class="value">R$ 450</span></div>
-                        <div class="ss-summary-row"><span class="label">Investimentos</span><span class="value">R$ 1.200</span></div>
-                    </div>
-                </div>
+                <img src="images/resumo.png" alt="Aba Resumo da planilha" class="preview-img" loading="lazy" width="400" height="250">
                 <p class="preview-label">Aba Resumo</p>
             </div>
             <div class="preview-item reveal" onclick="openLightbox('leia-me')">
-                <div class="ss-preview">
-                    <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
-                    <div class="ss-tab"><span>Leia-me</span></div>
-                    <div class="ss-readme">
-                        <h4>📋 Instruções</h4>
-                        <ul>
-                            <li>Preencha os dados na aba Gastos</li>
-                            <li>Veja o resumo automático</li>
-                            <li>Personalize categorias</li>
-                            <li>Controle mensal simples</li>
-                        </ul>
-                    </div>
-                </div>
+                <img src="images/leia-me.png" alt="Aba Leia-me da planilha" class="preview-img" loading="lazy" width="400" height="250">
                 <p class="preview-label">Aba Leia-me</p>
             </div>
         </div>
@@ -747,52 +706,13 @@
     function resetBtn() { submitBtn.disabled = false; submitBtn.innerHTML = '📥 Baixar Planilha Gratuitamente'; }
 
     // Lightbox
+    const lightboxImages = { gastos: 'images/gastos.png', resumo: 'images/resumo.png', 'leia-me': 'images/leia-me.png' };
+    const lightboxTitles = { gastos: 'Aba Gastos', resumo: 'Aba Resumo', 'leia-me': 'Aba Leia-me' };
+
     function openLightbox(tab) {
         const lb = document.getElementById('lightbox');
-        document.getElementById('lightboxTitle').textContent = tab === 'gastos' ? 'Aba Gastos' : tab === 'resumo' ? 'Aba Resumo' : 'Aba Leia-me';
-        const body = document.getElementById('lightboxBody');
-        if (tab === 'gastos') {
-            body.innerHTML = `<div class="ss-preview" style="aspect-ratio:auto; min-height:300px;">
-                <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
-                <div class="ss-tab"><span>Gastos</span></div>
-                <div class="ss-grid">
-                    <div class="ss-cell header">Data</div><div class="ss-cell header">Descrição</div><div class="ss-cell header">Categoria</div><div class="ss-cell header">Valor</div>
-                    ${Array(10).fill(0).map((_,i) => {
-                        const days = ['01/06','03/06','05/06','08/06','10/06','12/06','15/06','18/06','20/06','22/06'];
-                        const descs = ['Mercado','Internet','Software','Cliente A','Anúncios','Cliente B','Material','Freelancer','Assinatura','Consultoria'];
-                        const cats = ['Alimentação','Fixo','Ferramentas','Receita','Marketing','Receita','Estoque','Receita','Ferramentas','Receita'];
-                        const vals = ['R$ 450','R$ 120','R$ 89','R$ 2.500','R$ 200','R$ 1.800','R$ 320','R$ 3.100','R$ 49','R$ 950'];
-                        const cls = vals[i].startsWith('R$ 2')||vals[i].startsWith('R$ 1')||vals[i].startsWith('R$ 3')||vals[i].startsWith('R$ 9')?'green':'red';
-                        return `<div class="ss-cell">${days[i]}</div><div class="ss-cell">${descs[i]}</div><div class="ss-cell">${cats[i]}</div><div class="ss-cell ${cls}">${vals[i]}</div>`;
-                    }).join('')}
-                </div>
-            </div>`;
-        } else if (tab === 'resumo') {
-            body.innerHTML = `<div class="ss-preview" style="aspect-ratio:auto; min-height:300px;">
-                <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
-                <div class="ss-tab"><span>Resumo</span></div>
-                <div style="padding:20px;">${[
-                    ['Total Receitas','R$ 8.350','up'],['Total Gastos','R$ 3.228','down'],
-                    ['Saldo','R$ 5.122','up'],['Maior gasto','R$ 450',''],
-                    ['Investimentos','R$ 1.200',''],['Média diária','R$ 170',''],
-                    ['Categorias usadas','6',''],['Dias registrados','22','']
-                ].map(([l,v,c]) => `<div class="ss-summary-row"><span class="label">${l}</span><span class="value ${c}">${v}</span></div>`).join('')}</div>
-            </div>`;
-        } else {
-            body.innerHTML = `<div class="ss-preview" style="aspect-ratio:auto; min-height:300px;">
-                <div class="ss-toolbar"><div class="ss-dot"></div><div class="ss-dot"></div><div class="ss-dot"></div></div>
-                <div class="ss-tab"><span>Leia-me</span></div>
-                <div class="ss-readme">
-                    <h4>📋 Bem-vindo à Planilha de Controle de Gastos</h4>
-                    <p style="margin-bottom:12px;">Esta planilha foi criada para ajudar pequenos empreendedores a controlar suas finanças.</p>
-                    <h4>🚀 Como usar</h4>
-                    <ul><li>Preencha os dados na aba <strong>Gastos</strong></li><li>As categorias são personalizáveis</li><li>O resumo é gerado automaticamente</li><li>Registre tanto gastos quanto receitas</li></ul>
-                    <h4 style="margin-top:12px;">💡 Dicas</h4>
-                    <ul><li>Atualize semanalmente para melhor controle</li><li>Use as categorias que fazem sentido para seu negócio</li><li>Não apague as fórmulas das células coloridas</li></ul>
-                    <p style="margin-top:12px; color:var(--text-tertiary);">Desenvolvido por IgorDev</p>
-                </div>
-            </div>`;
-        }
+        document.getElementById('lightboxTitle').textContent = lightboxTitles[tab];
+        document.getElementById('lightboxBody').innerHTML = `<img src="${lightboxImages[tab]}" alt="${lightboxTitles[tab]}" style="width:100%; border-radius:var(--radius);">`;
         lb.classList.add('open');
         document.body.style.overflow = 'hidden';
     }

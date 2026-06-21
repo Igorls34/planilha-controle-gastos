@@ -430,6 +430,78 @@
         }
         .wa-float:hover { transform:scale(1.08); box-shadow:0 6px 28px rgba(34,197,94,0.45); }
 
+        /* ── Premium Animations ── */
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(37,99,235,0.2), 0 8px 32px rgba(37,99,235,0.15); }
+            50% { box-shadow: 0 0 40px rgba(37,99,235,0.4), 0 12px 40px rgba(37,99,235,0.25); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes fadeInUpSpring {
+            0% { opacity: 0; transform: translateY(40px) scale(0.96); }
+            60% { opacity: 1; transform: translateY(-4px) scale(1.01); }
+            80% { transform: translateY(2px) scale(0.995); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes particleDrift {
+            0% { transform: translate(0, 0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        .preview-card { animation: float 6s ease-in-out infinite; }
+        .hero-cta { animation: glowPulse 3s ease-in-out infinite; }
+        .hero-cta:hover { animation: none; }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 40%, var(--accent) 70%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .preview-item, .benefit-card, .proof-card, .card-icon {
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease, border-color 0.3s ease;
+        }
+        .preview-item:hover, .benefit-card:hover, .proof-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        .card-icon:hover { transform: translateY(-4px) scale(1.04); }
+
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            z-index: 200; width: 0%;
+            border-radius: 0 2px 2px 0;
+            transition: width 0.1s linear;
+        }
+
+        .hero-glow {
+            position: absolute; width: 600px; height: 600px;
+            border-radius: 50%; pointer-events: none;
+            background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            transition: opacity 0.3s;
+        }
+
+        .success-overlay .check i {
+            animation: fadeInUpSpring 0.8s ease-out forwards;
+        }
+        .success-overlay.active {
+            animation: fadeInUpSpring 0.7s ease-out forwards;
+        }
+
         @media (max-width:900px) {
             .hero-grid { flex-direction:column; gap:40px; text-align:center; }
             .hero h1 { font-size:2.2rem; }
@@ -455,6 +527,8 @@
 </head>
 <body>
 
+<div class="scroll-progress"></div>
+
 <header class="header">
     <div class="header-inner">
         <a href="/" class="logo">Igor<span>Dev</span></a>
@@ -464,6 +538,7 @@
 
 <!-- Hero -->
 <section class="hero">
+    <div class="hero-glow" id="heroGlow"></div>
     <div class="container hero-grid">
         <div class="hero-text reveal">
             <div class="hero-badge"><span class="dot"></span> Download Gratuito</div>
@@ -706,6 +781,52 @@
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Premium Animations ──
+
+    // Scroll progress bar
+    const scrollProgress = document.querySelector('.scroll-progress');
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollProgress.style.width = progress + '%';
+    }, { passive: true });
+
+    // Mouse-tracking glow on hero
+    const heroGlow = document.getElementById('heroGlow');
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        heroGlow.style.left = x + 'px';
+        heroGlow.style.top = y + 'px';
+        heroGlow.style.opacity = '1';
+    });
+    hero.addEventListener('mouseleave', () => {
+        heroGlow.style.opacity = '0';
+    });
+
+    // 3D tilt on preview card
+    const previewCard = document.querySelector('.preview-card');
+    if (previewCard) {
+        previewCard.addEventListener('mousemove', (e) => {
+            const rect = previewCard.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -6;
+            const rotateY = ((x - centerX) / centerX) * 6;
+            previewCard.style.transition = 'transform 0.1s ease-out';
+            previewCard.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+        previewCard.addEventListener('mouseleave', () => {
+            previewCard.style.transition = 'transform 0.6s ease-out';
+            previewCard.style.transform = '';
+        });
+    }
 
     // Phone mask
     const telInput = document.getElementById('telefone');

@@ -375,16 +375,46 @@
         .lightbox.open { display:flex; }
         .lightbox-content {
             background:var(--bg-card); border:1px solid var(--border);
-            border-radius:var(--radius-xl); padding:32px; max-width:700px;
-            width:100%; position:relative;
+            border-radius:var(--radius-xl); padding:16px; max-width:1000px;
+            width:100%; max-height:90vh; position:relative;
+            display:flex; flex-direction:column;
         }
+        .lightbox-header {
+            display:flex; align-items:center; justify-content:space-between;
+            margin-bottom:12px; flex-shrink:0;
+        }
+        .lightbox-title { font-size:1.1rem; font-weight:700; }
+        .lightbox-controls { display:flex; gap:4px; }
+        .lightbox-controls button {
+            width:34px; height:34px; border-radius:var(--radius-sm);
+            border:1px solid var(--border); background:var(--bg-elevated);
+            color:var(--text-secondary); cursor:pointer; font-size:0.9rem;
+            display:flex; align-items:center; justify-content:center;
+            transition:var(--transition);
+        }
+        .lightbox-controls button:hover { background:var(--bg-card); color:var(--text); border-color:var(--border-hover); }
         .lightbox-close {
-            position:absolute; top:12px; right:16px;
             background:none; border:none; color:var(--text-secondary);
-            font-size:1.5rem; cursor:pointer; transition:var(--transition);
+            font-size:1.4rem; cursor:pointer; transition:var(--transition);
+            line-height:1;
         }
         .lightbox-close:hover { color:var(--text); }
-        .lightbox-title { font-size:1.2rem; font-weight:700; margin-bottom:20px; }
+        .lightbox-zoom-container {
+            flex:1; overflow:hidden; position:relative; border-radius:var(--radius);
+            background:var(--bg-elevated); min-height:300px; cursor:grab;
+        }
+        .lightbox-zoom-container.grabbing { cursor:grabbing; }
+        .lightbox-zoom-container img {
+            position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+            max-width:none; display:block; pointer-events:none;
+            transition: transform 0.15s ease-out;
+        }
+        .lightbox-zoom-container img.no-transition { transition:none !important; }
+        .lightbox-hint {
+            position:absolute; bottom:10px; left:50%; transform:translateX(-50%);
+            font-size:0.7rem; color:var(--text-tertiary);
+            pointer-events:none; opacity:0.8;
+        }
 
         /* Animations */
         .reveal { opacity:0; transform:translateY(24px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
@@ -652,9 +682,19 @@
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
     <div class="lightbox-content" onclick="event.stopPropagation()">
-        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <div class="lightbox-title" id="lightboxTitle"></div>
-        <div id="lightboxBody"></div>
+        <div class="lightbox-header">
+            <div class="lightbox-title" id="lightboxTitle"></div>
+            <div class="lightbox-controls">
+                <button id="zoomOutBtn" title="Diminuir zoom" onclick="zoomLightbox(-0.5)"><i class="fa-solid fa-minus"></i></button>
+                <button id="zoomResetBtn" title="Ajustar à tela" onclick="resetZoom()"><i class="fa-solid fa-arrows-to-dot"></i></button>
+                <button id="zoomInBtn" title="Aumentar zoom" onclick="zoomLightbox(0.5)"><i class="fa-solid fa-plus"></i></button>
+                <button class="lightbox-close" onclick="closeLightbox()" title="Fechar">&times;</button>
+            </div>
+        </div>
+        <div class="lightbox-zoom-container" id="zoomContainer">
+            <img id="lightboxImg" src="" alt="" draggable="false">
+            <div class="lightbox-hint">🖱️ Scroll para zoom &bull; Arraste para mover &bull; Duplo clique para reset</div>
+        </div>
     </div>
 </div>
 
@@ -722,25 +762,100 @@
     // Lightbox
     const lightboxImages = { gastos: 'images/gastos.png', resumo: 'images/resumo.png', 'leia-me': 'images/leia-me.png' };
     const lightboxTitles = { gastos: 'Aba Gastos', resumo: 'Aba Resumo', 'leia-me': 'Aba Leia-me' };
+    const lbImg = document.getElementById('lightboxImg');
+    const zoomContainer = document.getElementById('zoomContainer');
+    const zoomControls = document.getElementById('zoomInBtn').parentElement;
+    let currentZoom = 1, currentX = 0, currentY = 0;
+    let isDragging = false, dragStartX = 0, dragStartY = 0, startX = 0, startY = 0;
+
+    function updateTransform(animate) {
+        if (!animate) lbImg.classList.add('no-transition');
+        else lbImg.classList.remove('no-transition');
+        lbImg.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${currentZoom})`;
+    }
 
     function openLightbox(tab) {
         const lb = document.getElementById('lightbox');
         document.getElementById('lightboxTitle').textContent = lightboxTitles[tab];
-        document.getElementById('lightboxBody').innerHTML = `<img src="${lightboxImages[tab]}" alt="${lightboxTitles[tab]}" style="width:100%; border-radius:var(--radius);">`;
+        lbImg.src = lightboxImages[tab];
+        lbImg.alt = lightboxTitles[tab];
+        zoomControls.style.display = 'flex';
+        currentZoom = 1; currentX = 0; currentY = 0;
+        updateTransform(false);
         lb.classList.add('open');
         document.body.style.overflow = 'hidden';
     }
     function openLightboxImage(src, title) {
         const lb = document.getElementById('lightbox');
         document.getElementById('lightboxTitle').textContent = title;
-        document.getElementById('lightboxBody').innerHTML = `<img src="${src}" alt="${title}" style="max-width:320px; border-radius:50%; margin:0 auto; display:block;">`;
+        lbImg.src = src;
+        lbImg.alt = title;
+        zoomControls.style.display = 'none';
+        currentZoom = 1; currentX = 0; currentY = 0;
+        lbImg.style.transform = 'translate(-50%,-50%) scale(1)';
         lb.classList.add('open');
         document.body.style.overflow = 'hidden';
     }
+
+    function zoomLightbox(delta) {
+        const newZoom = Math.max(0.5, Math.min(5, currentZoom + delta));
+        currentZoom = newZoom;
+        updateTransform(true);
+    }
+    function resetZoom() { currentZoom = 1; currentX = 0; currentY = 0; updateTransform(true); }
+
+    zoomContainer.addEventListener('wheel', function(e) {
+        e.preventDefault();
+        const delta = e.deltaY < 0 ? 0.2 : -0.2;
+        zoomLightbox(delta);
+    });
+
+    zoomContainer.addEventListener('mousedown', function(e) {
+        if (e.button !== 0) return;
+        isDragging = true;
+        zoomContainer.classList.add('grabbing');
+        dragStartX = e.clientX; dragStartY = e.clientY;
+        startX = currentX; startY = currentY;
+    });
+    window.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        currentX = startX + (e.clientX - dragStartX);
+        currentY = startY + (e.clientY - dragStartY);
+        updateTransform(false);
+    });
+    window.addEventListener('mouseup', function() {
+        isDragging = false;
+        zoomContainer.classList.remove('grabbing');
+    });
+    zoomContainer.addEventListener('dblclick', function(e) {
+        if (currentZoom !== 1) resetZoom();
+        else { currentZoom = 2; updateTransform(true); }
+    });
+
+    // Touch support
+    let touchStartDist = 0, touchStartZoom = 1;
+    zoomContainer.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+            touchStartDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+            touchStartZoom = currentZoom;
+        }
+    });
+    zoomContainer.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2) {
+            e.preventDefault();
+            const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+            currentZoom = Math.max(0.5, Math.min(5, touchStartZoom * (dist / touchStartDist)));
+            updateTransform(false);
+        }
+    });
+
     function closeLightbox(e) {
         if (e && e.target !== document.getElementById('lightbox')) return;
         document.getElementById('lightbox').classList.remove('open');
         document.body.style.overflow = '';
+        lbImg.src = '';
+        currentZoom = 1; currentX = 0; currentY = 0;
+        isDragging = false;
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 </script>

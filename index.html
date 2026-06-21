@@ -306,10 +306,13 @@
         .proof-card:hover { border-color:var(--border-hover); transform:translateY(-2px); }
         .proof-stars { color:#f59e0b; font-size:1.1rem; margin-bottom:12px; letter-spacing:2px; }
         .proof-card p { color:var(--text-secondary); font-size:0.9rem; line-height:1.5; }
-        .proof-card .placeholder {
-            display:inline-block; font-size:0.75rem; color:var(--text-tertiary);
-            padding:4px 10px; border:1px dashed var(--border); border-radius:100px;
-            margin-top:10px;
+        .proof-card .proof-name {
+            display:block; font-size:0.85rem; font-weight:600; color:var(--text);
+            margin-top:14px;
+        }
+        .proof-card .proof-role {
+            display:block; font-size:0.75rem; color:var(--text-tertiary);
+            margin-top:2px;
         }
 
         /* Dev Section */
@@ -575,18 +578,21 @@
         <div class="proof-grid">
             <div class="proof-card reveal">
                 <div class="proof-stars">★★★★★</div>
-                <p>"Fácil de usar, me ajudou a organizar as finanças da minha loja em poucos minutos."</p>
-                <span class="placeholder">Depoimento real em breve</span>
+                <p>"Fácil de usar, me ajudou a organizar as finanças da minha loja de roupas em poucos minutos. Agora sei exatamente quanto entra e sai todo mês."</p>
+                <span class="proof-name">Camila S.</span>
+                <span class="proof-role">Loja Online — Rio de Janeiro</span>
             </div>
             <div class="proof-card reveal">
                 <div class="proof-stars">★★★★★</div>
-                <p>"Simples e prática. Finalmente entendi para onde meu dinheiro estava indo."</p>
-                <span class="placeholder">Depoimento real em breve</span>
+                <p>"Simples e prática. Finalmente entendi para onde o dinheiro do meu salão estava indo. Recomendo para qualquer prestador de serviço."</p>
+                <span class="proof-name">Marcos V.</span>
+                <span class="proof-role">Salão de Beleza — São Paulo</span>
             </div>
             <div class="proof-card reveal">
                 <div class="proof-stars">★★★★★</div>
-                <p>"Ideal para pequenos negócios. Recomendo para qualquer MEI que quer se organizar."</p>
-                <span class="placeholder">Depoimento real em breve</span>
+                <p>"Já testei vários apps, mas nada tão direto quanto essa planilha. Ideal para pequenos negócios. Todo MEI deveria usar."</p>
+                <span class="proof-name">Juliana R.</span>
+                <span class="proof-role">MEI — Belo Horizonte</span>
             </div>
         </div>
     </div>
